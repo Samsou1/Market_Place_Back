@@ -1,0 +1,1115 @@
+  [1m[35m (360.4ms)[0m  [1m[35mCREATE DATABASE "rails_7_0_4_api_boiler_plate_development" ENCODING = 'unicode'[0m
+  [1m[35m (229.3ms)[0m  [1m[35mCREATE DATABASE "rails_7_0_4_api_boiler_plate_test" ENCODING = 'unicode'[0m
+  [1m[35m (18.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (13.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5164472170642191015)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20221123135844)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (15.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp(6), "remember_created_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20221123135844"]]
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-11-23 14:00:03.568605"], ["updated_at", "2022-11-23 14:00:03.568605"]]
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(5164472170642191015)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5164472170642191015)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateJwtDenylist (20221123140015)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (19.3ms)[0m  [1m[35mCREATE TABLE "jwt_denylist" ("id" bigserial primary key, "jti" character varying NOT NULL, "exp" timestamp NOT NULL)[0m
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE INDEX "index_jwt_denylist_on_jti" ON "jwt_denylist" ("jti")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20221123140015"]]
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(5164472170642191015)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/users/sign_in" for 127.0.0.1 at 2022-11-23 15:05:44 +0100
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"test@example.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test@example.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 73ms (ActiveRecord: 8.9ms | Allocations: 22226)
+
+
+Processing by Users::SessionsController#new as */*
+  Parameters: {"user"=>{"email"=>"test@example.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test@example.com", "password"=>"[FILTERED]"}}}
+Completed 200 OK in 629ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 18820)
+
+
+Started GET "/" for ::1 at 2022-11-23 15:29:29 +0100
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/sam/.rvm/gems/ruby-3.0.4/gems/railties-7.0.4/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/sam/.rvm/gems/ruby-3.0.4/gems/railties-7.0.4/lib/rails/templates/rails/welcome/index.html.erb (Duration: 5.6ms | Allocations: 831)
+Completed 200 OK in 42ms (Views: 17.6ms | ActiveRecord: 0.0ms | Allocations: 7673)
+
+
+Started GET "/" for 127.0.0.1 at 2022-11-23 16:11:06 +0100
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/sam/.rvm/gems/ruby-3.0.4/gems/railties-7.0.4/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/sam/.rvm/gems/ruby-3.0.4/gems/railties-7.0.4/lib/rails/templates/rails/welcome/index.html.erb (Duration: 53.3ms | Allocations: 388)
+Completed 200 OK in 136ms (Views: 101.3ms | Allocations: 1368)
+
+
+Started GET "/" for 127.0.0.1 at 2022-11-23 17:45:11 +0100
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/sam/.rvm/gems/ruby-3.0.4/gems/railties-7.0.4/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/sam/.rvm/gems/ruby-3.0.4/gems/railties-7.0.4/lib/rails/templates/rails/welcome/index.html.erb (Duration: 3.9ms | Allocations: 16)
+Completed 200 OK in 46ms (Views: 22.1ms | Allocations: 283)
+
+
+Started GET "/" for 127.0.0.1 at 2022-11-23 17:50:43 +0100
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/sam/.rvm/gems/ruby-3.0.4/gems/railties-7.0.4/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/sam/.rvm/gems/ruby-3.0.4/gems/railties-7.0.4/lib/rails/templates/rails/welcome/index.html.erb (Duration: 38.4ms | Allocations: 15)
+Completed 200 OK in 43ms (Views: 40.0ms | Allocations: 253)
+
+
+Started POST "/users" for 127.0.0.1 at 2022-11-24 14:38:21 +0100
+
+ActiveRecord::ConnectionNotEstablished - connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?:
+
+Started POST "/users" for 127.0.0.1 at 2022-11-24 14:38:48 +0100
+
+ActiveRecord::ConnectionNotEstablished - connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?:
+
+Started POST "/users" for 127.0.0.1 at 2022-11-24 14:39:07 +0100
+
+ActiveRecord::ConnectionNotEstablished - connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?:
+
+Started POST "/users" for 127.0.0.1 at 2022-11-24 14:40:18 +0100
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"lov@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"lov@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (8.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "lov@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 13:40:19.864385"], ["updated_at", "2022-11-24 13:40:19.864385"]]
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 705ms (Views: 0.6ms | ActiveRecord: 25.5ms | Allocations: 40543)
+
+
+  [1m[36mUser Load (3.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started POST "/users" for ::1 at 2022-11-24 14:43:29 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 13:43:29.796202"], ["updated_at", "2022-11-24 13:43:29.796202"]]
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 619ms (Views: 0.3ms | ActiveRecord: 4.4ms | Allocations: 3556)
+
+
+Started POST "/users" for 127.0.0.1 at 2022-11-24 14:43:36 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"tui@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"tui@mail.com", "password"=>"[FILTERED]"}}}
+Started POST "/users" for 127.0.0.1 at 2022-11-24 14:43:36 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"tui@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"tui@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "tui@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 13:43:37.173977"], ["updated_at", "2022-11-24 13:43:37.173977"]]
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 611ms (Views: 0.3ms | ActiveRecord: 5.7ms | Allocations: 5071)
+
+
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (3.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "tui@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 13:43:37.198561"], ["updated_at", "2022-11-24 13:43:37.198561"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 518ms (ActiveRecord: 4.9ms | Allocations: 8570)
+
+
+
+ActiveRecord::RecordNotUnique - PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=(tui@mail.com) already exists.:
+
+Started POST "/users" for 127.0.0.1 at 2022-11-24 14:46:30 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test22@example.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test22@example.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test22@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 13:46:31.060934"], ["updated_at", "2022-11-24 13:46:31.060934"]]
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 647ms (Views: 0.3ms | ActiveRecord: 3.7ms | Allocations: 7962)
+
+
+Started POST "/users" for ::1 at 2022-11-24 14:47:31 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test2", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test2", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test2"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 13:47:32.155899"], ["updated_at", "2022-11-24 13:47:32.155899"]]
+  [1m[36mTRANSACTION (10.7ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 600ms (Views: 0.3ms | ActiveRecord: 12.0ms | Allocations: 3469)
+
+
+Started POST "/users" for 127.0.0.1 at 2022-11-24 14:48:29 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"lol@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"lol@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "lol@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 13:48:30.519150"], ["updated_at", "2022-11-24 13:48:30.519150"]]
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 603ms (Views: 0.3ms | ActiveRecord: 4.9ms | Allocations: 3474)
+
+
+Started POST "/users" for ::1 at 2022-11-24 14:48:59 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test2@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test2@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test2@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 13:48:59.957197"], ["updated_at", "2022-11-24 13:48:59.957197"]]
+  [1m[36mTRANSACTION (5.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 609ms (Views: 0.5ms | ActiveRecord: 6.6ms | Allocations: 3487)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2022-11-24 14:53:03 +0100
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"user"=>{"email"=>"lol@mail.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"lol@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "lol@mail.com"], ["LIMIT", 1]]
+Completed 200 OK in 601ms (Views: 0.3ms | ActiveRecord: 1.8ms | Allocations: 5113)
+
+
+Started POST "/users" for ::1 at 2022-11-24 14:53:09 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (2.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 13:53:09.841458"], ["updated_at", "2022-11-24 13:53:09.841458"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 600ms (ActiveRecord: 3.9ms | Allocations: 4883)
+
+
+
+ActiveRecord::RecordNotUnique - PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=(test) already exists.:
+
+Started POST "/users" for ::1 at 2022-11-24 14:55:10 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test1", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test1", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test1"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 13:55:11.443708"], ["updated_at", "2022-11-24 13:55:11.443708"]]
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 633ms (Views: 0.3ms | ActiveRecord: 5.4ms | Allocations: 3477)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2022-11-24 14:55:17 +0100
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"user"=>{"email"=>"lol@mail.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"lol@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "lol@mail.com"], ["LIMIT", 1]]
+Completed 200 OK in 633ms (Views: 0.4ms | ActiveRecord: 0.9ms | Allocations: 1656)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2022-11-24 14:56:22 +0100
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"user"=>{"email"=>"lol@mail.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"lol@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "lol@mail.com"], ["LIMIT", 1]]
+Completed 200 OK in 644ms (Views: 0.3ms | ActiveRecord: 1.2ms | Allocations: 1585)
+
+
+Started POST "/users" for ::1 at 2022-11-24 15:36:51 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (35.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 14:36:52.450259"], ["updated_at", "2022-11-24 14:36:52.450259"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 804ms (ActiveRecord: 79.5ms | Allocations: 7656)
+
+
+
+ActiveRecord::RecordNotUnique - PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=(test) already exists.:
+
+Started POST "/users" for ::1 at 2022-11-24 15:37:02 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test02", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test02", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test02"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 14:37:03.488495"], ["updated_at", "2022-11-24 14:37:03.488495"]]
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 610ms (Views: 2.4ms | ActiveRecord: 6.3ms | Allocations: 3493)
+
+
+Started POST "/users" for ::1 at 2022-11-24 15:39:02 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test03", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test03", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (3.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test03"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 14:39:03.327495"], ["updated_at", "2022-11-24 14:39:03.327495"]]
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 601ms (Views: 0.3ms | ActiveRecord: 6.5ms | Allocations: 3471)
+
+
+Started POST "/users" for 127.0.0.1 at 2022-11-24 15:41:28 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test22@example.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test22@example.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 3656ms (ActiveRecord: 3.2ms | Allocations: 955430)
+
+
+
+NameError - undefined local variable or method `flash' for #<Users::RegistrationsController:0x0000000000aeb0>:
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2022-11-24 15:41:49 +0100
+Processing by Users::SessionsController#destroy as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Completed 401 Unauthorized in 21ms (Views: 0.5ms | ActiveRecord: 0.6ms | Allocations: 1495)
+
+
+
+JWT::VerificationError - Signature verification failed:
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2022-11-24 15:42:01 +0100
+Processing by Users::SessionsController#destroy as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Completed 401 Unauthorized in 15ms (Views: 0.4ms | ActiveRecord: 0.7ms | Allocations: 1453)
+
+
+
+JWT::VerificationError - Signature verification failed:
+
+Started POST "/users" for 127.0.0.1 at 2022-11-24 15:43:34 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test22@example.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test22@example.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.9ms | Allocations: 4285)
+
+
+
+NameError - undefined local variable or method `flash' for #<Users::RegistrationsController:0x0000000000afa0>:
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2022-11-24 15:43:52 +0100
+Processing by Users::SessionsController#destroy as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Completed 401 Unauthorized in 10ms (Views: 0.6ms | ActiveRecord: 0.7ms | Allocations: 1453)
+
+
+
+JWT::VerificationError - Signature verification failed:
+
+Started POST "/users" for 127.0.0.1 at 2022-11-24 15:49:16 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"chris.cp147@gmail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"chris.cp147@gmail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (5.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "chris.cp147@gmail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 14:49:17.354724"], ["updated_at", "2022-11-24 14:49:17.354724"]]
+  [1m[36mTRANSACTION (3.2ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 678ms (Views: 0.4ms | ActiveRecord: 28.8ms | Allocations: 6308)
+
+
+Started POST "/users" for ::1 at 2022-11-24 16:07:30 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test04", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test04", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (3.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test04"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 15:07:31.558137"], ["updated_at", "2022-11-24 15:07:31.558137"]]
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 632ms (Views: 0.3ms | ActiveRecord: 19.5ms | Allocations: 6251)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2022-11-24 16:08:15 +0100
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"test22@example.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test22@example.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 41ms (ActiveRecord: 4.0ms | Allocations: 4368)
+
+
+
+NameError - undefined local variable or method `flash' for #<Users::SessionsController:0x0000000000b158>:
+
+Started POST "/users" for 127.0.0.1 at 2022-11-24 16:08:47 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test22@example.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test22@example.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 33ms (ActiveRecord: 1.1ms | Allocations: 4283)
+
+
+
+NameError - undefined local variable or method `flash' for #<Users::RegistrationsController:0x0000000000b1d0>:
+
+Started POST "/users" for 127.0.0.1 at 2022-11-24 16:09:02 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test22@example.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test22@example.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (24.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test22@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 15:09:03.068077"], ["updated_at", "2022-11-24 15:09:03.068077"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 611ms (ActiveRecord: 25.1ms | Allocations: 4725)
+
+
+
+ActiveRecord::RecordNotUnique - PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=(test22@example.com) already exists.:
+
+Started POST "/users" for 127.0.0.1 at 2022-11-24 16:09:12 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test23@example.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test23@example.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (2.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test23@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 15:09:13.310067"], ["updated_at", "2022-11-24 15:09:13.310067"]]
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 604ms (Views: 0.6ms | ActiveRecord: 6.0ms | Allocations: 3487)
+
+
+Started POST "/users" for ::1 at 2022-11-24 16:12:07 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test05", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test05", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (4.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test05"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 15:12:07.969444"], ["updated_at", "2022-11-24 15:12:07.969444"]]
+  [1m[36mTRANSACTION (5.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 607ms (Views: 0.3ms | ActiveRecord: 10.5ms | Allocations: 3471)
+
+
+  [1m[36mUser Load (5.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started POST "/users" for ::1 at 2022-11-24 16:17:28 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test05@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test05@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (2.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test05@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 15:17:31.076832"], ["updated_at", "2022-11-24 15:17:31.076832"]]
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 793ms (Views: 6.2ms | ActiveRecord: 22.3ms | Allocations: 9418)
+
+
+Started POST "/users" for ::1 at 2022-11-24 16:24:36 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test06@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test06@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (2.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test06@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 15:24:37.181168"], ["updated_at", "2022-11-24 15:24:37.181168"]]
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 690ms (Views: 0.8ms | ActiveRecord: 18.9ms | Allocations: 6351)
+
+
+Started POST "/users" for ::1 at 2022-11-24 16:39:00 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test07@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test07@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test07@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 15:39:00.606542"], ["updated_at", "2022-11-24 15:39:00.606542"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 611ms (Views: 1.1ms | ActiveRecord: 16.6ms | Allocations: 6348)
+
+
+Started POST "/users" for ::1 at 2022-11-24 16:39:33 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test08@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test08@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test08@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 15:39:34.641023"], ["updated_at", "2022-11-24 15:39:34.641023"]]
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 660ms (Views: 0.6ms | ActiveRecord: 4.3ms | Allocations: 3567)
+
+
+Started POST "/users" for ::1 at 2022-11-24 16:47:37 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test09@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test09@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (3.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test09@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 15:47:37.714065"], ["updated_at", "2022-11-24 15:47:37.714065"]]
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 620ms (Views: 0.8ms | ActiveRecord: 21.9ms | Allocations: 6348)
+
+
+Started POST "/users" for ::1 at 2022-11-24 16:48:05 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test10@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test10@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (2.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test10@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 15:48:06.408077"], ["updated_at", "2022-11-24 15:48:06.408077"]]
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 573ms (Views: 0.7ms | ActiveRecord: 5.5ms | Allocations: 3567)
+
+
+Started POST "/users" for ::1 at 2022-11-24 16:51:05 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test11@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test11@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (2.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test11@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 15:51:05.729345"], ["updated_at", "2022-11-24 15:51:05.729345"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 682ms (Views: 0.6ms | ActiveRecord: 5.3ms | Allocations: 3567)
+
+
+Started POST "/users" for ::1 at 2022-11-24 16:53:31 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"body"=>{"user"=>{"email"=>"test10@mail.com", "password"=>"[FILTERED]"}}, "registration"=>{"body"=>{"user"=>{"email"=>"test10@mail.com", "password"=>"[FILTERED]"}}}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", ""], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 15:53:31.831007"], ["updated_at", "2022-11-24 15:53:31.831007"]]
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 55ms (Views: 1.2ms | ActiveRecord: 5.3ms | Allocations: 3522)
+
+
+Started POST "/users" for ::1 at 2022-11-24 16:58:00 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test12@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test12@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (2.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test12@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 15:58:00.798047"], ["updated_at", "2022-11-24 15:58:00.798047"]]
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 630ms (Views: 1.1ms | ActiveRecord: 5.2ms | Allocations: 3567)
+
+
+Started POST "/users" for ::1 at 2022-11-24 16:59:02 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test12@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test12@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (48.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test12@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 15:59:02.975734"], ["updated_at", "2022-11-24 15:59:02.975734"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 686ms (ActiveRecord: 50.4ms | Allocations: 4753)
+
+
+
+ActiveRecord::RecordNotUnique - PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=(test12@mail.com) already exists.:
+
+Started POST "/users" for ::1 at 2022-11-24 17:01:00 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test14@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test14@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test14@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:01:01.472599"], ["updated_at", "2022-11-24 16:01:01.472599"]]
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 622ms (Views: 1.7ms | ActiveRecord: 6.0ms | Allocations: 3571)
+
+
+Started POST "/users" for ::1 at 2022-11-24 17:05:16 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"body"=>{"user"=>{"email"=>"test15@mail.com", "password"=>"[FILTERED]"}}, "registration"=>{"body"=>{"user"=>{"email"=>"test15@mail.com", "password"=>"[FILTERED]"}}}}
+  [1m[36mTRANSACTION (3.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (17.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", ""], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:05:16.905538"], ["updated_at", "2022-11-24 16:05:16.905538"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 87ms (ActiveRecord: 20.9ms | Allocations: 4672)
+
+
+
+ActiveRecord::RecordNotUnique - PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.:
+
+Started POST "/users" for ::1 at 2022-11-24 17:05:30 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"body"=>{"user"=>{"email"=>"test16@mail.com", "password"=>"[FILTERED]"}}, "registration"=>{"body"=>{"user"=>{"email"=>"test16@mail.com", "password"=>"[FILTERED]"}}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (23.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", ""], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:05:30.233462"], ["updated_at", "2022-11-24 16:05:30.233462"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 70ms (ActiveRecord: 24.2ms | Allocations: 4673)
+
+
+
+ActiveRecord::RecordNotUnique - PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=() already exists.:
+
+Started POST "/users" for ::1 at 2022-11-24 17:06:21 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test16@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test16@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (3.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test16@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:06:21.755561"], ["updated_at", "2022-11-24 16:06:21.755561"]]
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 587ms (Views: 0.8ms | ActiveRecord: 6.3ms | Allocations: 3568)
+
+
+Started POST "/users" for ::1 at 2022-11-24 17:06:39 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test17@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test17@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test17@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:06:40.074376"], ["updated_at", "2022-11-24 16:06:40.074376"]]
+  [1m[36mTRANSACTION (4.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 579ms (Views: 0.9ms | ActiveRecord: 6.6ms | Allocations: 3570)
+
+
+Started POST "/users" for ::1 at 2022-11-24 17:06:59 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test18@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test18@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (4.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test18@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:06:59.939058"], ["updated_at", "2022-11-24 16:06:59.939058"]]
+  [1m[36mTRANSACTION (6.8ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 590ms (Views: 1.0ms | ActiveRecord: 11.4ms | Allocations: 3570)
+
+
+Started POST "/users" for ::1 at 2022-11-24 17:11:26 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test17@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test17@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (4.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test17@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:11:27.184831"], ["updated_at", "2022-11-24 16:11:27.184831"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 597ms (ActiveRecord: 5.4ms | Allocations: 4722)
+
+
+
+ActiveRecord::RecordNotUnique - PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=(test17@mail.com) already exists.:
+
+Started POST "/users" for ::1 at 2022-11-24 17:11:33 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test18@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test18@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (3.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test18@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:11:34.228757"], ["updated_at", "2022-11-24 16:11:34.228757"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 613ms (ActiveRecord: 4.0ms | Allocations: 4726)
+
+
+
+ActiveRecord::RecordNotUnique - PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=(test18@mail.com) already exists.:
+
+Started POST "/users" for ::1 at 2022-11-24 17:11:42 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test20@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test20@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (3.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test20@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:11:42.750875"], ["updated_at", "2022-11-24 16:11:42.750875"]]
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 580ms (Views: 1.0ms | ActiveRecord: 8.3ms | Allocations: 3568)
+
+
+Started POST "/users" for ::1 at 2022-11-24 17:12:28 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test21@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test21@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test21@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:12:29.552989"], ["updated_at", "2022-11-24 16:12:29.552989"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 577ms (Views: 0.7ms | ActiveRecord: 4.8ms | Allocations: 3568)
+
+
+  [1m[36mUser Load (8.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started POST "/register" for ::1 at 2022-11-24 17:21:48 +0100
+  
+ActionController::RoutingError (No route matches [POST] "/register"):
+  
+Started POST "/register" for ::1 at 2022-11-24 17:23:48 +0100
+  
+ActionController::RoutingError (No route matches [POST] "/register"):
+  
+Started POST "/users" for ::1 at 2022-11-24 17:24:02 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test24@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test24@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (7.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test24@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:24:03.709169"], ["updated_at", "2022-11-24 16:24:03.709169"]]
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 752ms (Views: 0.8ms | ActiveRecord: 61.3ms | Allocations: 6353)
+
+
+Started POST "/users" for ::1 at 2022-11-24 17:24:43 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test25@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test25@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test25@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:24:44.458597"], ["updated_at", "2022-11-24 16:24:44.458597"]]
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 597ms (Views: 0.7ms | ActiveRecord: 4.9ms | Allocations: 3571)
+
+
+Started POST "/users" for ::1 at 2022-11-24 17:25:09 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test26@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test26@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (3.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test26@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:25:09.880962"], ["updated_at", "2022-11-24 16:25:09.880962"]]
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 606ms (Views: 1.1ms | ActiveRecord: 7.0ms | Allocations: 3572)
+
+
+Started POST "/users" for ::1 at 2022-11-24 17:25:39 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test27@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test27@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test27@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:25:39.997796"], ["updated_at", "2022-11-24 16:25:39.997796"]]
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 594ms (Views: 0.7ms | ActiveRecord: 5.2ms | Allocations: 3572)
+
+
+Started POST "/users" for ::1 at 2022-11-24 17:26:21 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test28@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test28@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test28@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:26:22.258909"], ["updated_at", "2022-11-24 16:26:22.258909"]]
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 591ms (Views: 1.1ms | ActiveRecord: 3.7ms | Allocations: 3571)
+
+
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started POST "/users" for ::1 at 2022-11-24 17:30:25 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test29@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test29@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (2.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test29@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:30:26.431179"], ["updated_at", "2022-11-24 16:30:26.431179"]]
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 631ms (Views: 1.1ms | ActiveRecord: 5.2ms | Allocations: 3571)
+
+
+Started POST "/users" for ::1 at 2022-11-24 17:31:38 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test30@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test30@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test30@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:31:39.079066"], ["updated_at", "2022-11-24 16:31:39.079066"]]
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 599ms (Views: 0.7ms | ActiveRecord: 4.1ms | Allocations: 3572)
+
+
+Started POST "/users" for ::1 at 2022-11-24 17:32:00 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test31@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test31@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (3.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test31@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:32:01.390195"], ["updated_at", "2022-11-24 16:32:01.390195"]]
+  [1m[36mTRANSACTION (3.2ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 593ms (Views: 2.0ms | ActiveRecord: 6.6ms | Allocations: 3571)
+
+
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started POST "/users" for ::1 at 2022-11-24 17:34:52 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test32@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test32@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (2.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test32@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 16:34:53.322560"], ["updated_at", "2022-11-24 16:34:53.322560"]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 613ms (Views: 1.0ms | ActiveRecord: 7.9ms | Allocations: 3572)
+
+
+  [1m[36mUser Load (32.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started POST "/users" for ::1 at 2022-11-24 18:20:18 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test33@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test33@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (13.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test33@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:20:19.200848"], ["updated_at", "2022-11-24 17:20:19.200848"]]
+  [1m[36mTRANSACTION (6.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 993ms (Views: 15.8ms | ActiveRecord: 69.3ms | Allocations: 6356)
+
+
+  [1m[36mUser Load (5.9ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started POST "/users" for ::1 at 2022-11-24 18:22:08 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test34@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test34@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test34@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:22:08.621053"], ["updated_at", "2022-11-24 17:22:08.621053"]]
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 614ms (Views: 0.9ms | ActiveRecord: 5.9ms | Allocations: 3571)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:22:56 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test35@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test35@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test35@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:22:57.044389"], ["updated_at", "2022-11-24 17:22:57.044389"]]
+  [1m[36mTRANSACTION (2.2ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 603ms (Views: 0.7ms | ActiveRecord: 4.6ms | Allocations: 3575)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:23:13 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test36@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test36@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (4.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test36@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:23:13.664869"], ["updated_at", "2022-11-24 17:23:13.664869"]]
+  [1m[36mTRANSACTION (2.2ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 654ms (Views: 1.4ms | ActiveRecord: 7.7ms | Allocations: 3571)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:23:24 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test37@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test37@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test37@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:23:24.683699"], ["updated_at", "2022-11-24 17:23:24.683699"]]
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 583ms (Views: 1.0ms | ActiveRecord: 4.5ms | Allocations: 3571)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:24:29 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test38@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test38@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test38@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:24:29.663204"], ["updated_at", "2022-11-24 17:24:29.663204"]]
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 608ms (Views: 1.1ms | ActiveRecord: 6.6ms | Allocations: 3571)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:24:54 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test39@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test39@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (2.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test39@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:24:55.375028"], ["updated_at", "2022-11-24 17:24:55.375028"]]
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 652ms (Views: 5.3ms | ActiveRecord: 6.6ms | Allocations: 3575)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:26:58 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test40@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test40@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (2.6ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test40@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:26:59.070837"], ["updated_at", "2022-11-24 17:26:59.070837"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 625ms (Views: 0.8ms | ActiveRecord: 5.8ms | Allocations: 3572)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:27:56 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test41@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test41@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test41@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:27:56.638899"], ["updated_at", "2022-11-24 17:27:56.638899"]]
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 588ms (Views: 0.7ms | ActiveRecord: 4.9ms | Allocations: 3571)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:29:31 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test42@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test42@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test42@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:29:32.142664"], ["updated_at", "2022-11-24 17:29:32.142664"]]
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 598ms (Views: 1.5ms | ActiveRecord: 3.8ms | Allocations: 3572)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:42:09 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test43@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test43@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (10.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test43@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:42:10.054796"], ["updated_at", "2022-11-24 17:42:10.054796"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 696ms (Views: 2.0ms | ActiveRecord: 52.5ms | Allocations: 6352)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:47:43 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test44@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test44@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (7.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test44@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:47:44.183433"], ["updated_at", "2022-11-24 17:47:44.183433"]]
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 698ms (Views: 2.9ms | ActiveRecord: 33.5ms | Allocations: 6352)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:48:05 +0100
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test45@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test45@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test45@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:48:05.987966"], ["updated_at", "2022-11-24 17:48:05.987966"]]
+  [1m[36mTRANSACTION (2.2ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 618ms (Views: 0.7ms | ActiveRecord: 4.2ms | Allocations: 3571)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:55:20 +0100
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"test46@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test46@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test46@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:55:22.121136"], ["updated_at", "2022-11-24 17:55:22.121136"]]
+  [1m[36mTRANSACTION (7.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 784ms (Views: 1.5ms | ActiveRecord: 55.5ms | Allocations: 40701)
+
+
+Started POST "/users/sign_in" for ::1 at 2022-11-24 18:56:16 +0100
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test46@mail.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"test46@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "test46@mail.com"], ["LIMIT", 1]]
+Completed 200 OK in 601ms (Views: 0.3ms | ActiveRecord: 4.4ms | Allocations: 5130)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:58:32 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test50@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test50@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test50@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:58:33.098497"], ["updated_at", "2022-11-24 17:58:33.098497"]]
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 594ms (Views: 1.0ms | ActiveRecord: 5.4ms | Allocations: 3740)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:58:49 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test51@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test51@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test51@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:58:50.488326"], ["updated_at", "2022-11-24 17:58:50.488326"]]
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 587ms (Views: 0.6ms | ActiveRecord: 4.2ms | Allocations: 3590)
+
+
+Started POST "/users" for ::1 at 2022-11-24 18:59:12 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test52@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test52@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test52@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 17:59:12.788896"], ["updated_at", "2022-11-24 17:59:12.788896"]]
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 598ms (Views: 0.7ms | ActiveRecord: 4.3ms | Allocations: 3587)
+
+
+Started POST "/users" for ::1 at 2022-11-24 19:00:07 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test53@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test53@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (5.6ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test53@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 18:00:08.152244"], ["updated_at", "2022-11-24 18:00:08.152244"]]
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 587ms (Views: 0.6ms | ActiveRecord: 9.1ms | Allocations: 3567)
+
+
+Started POST "/users" for ::1 at 2022-11-24 19:00:51 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test53@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test53@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (32.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test53@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 18:00:52.027052"], ["updated_at", "2022-11-24 18:00:52.027052"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 665ms (ActiveRecord: 33.6ms | Allocations: 4836)
+
+
+
+ActiveRecord::RecordNotUnique - PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=(test53@mail.com) already exists.:
+
+Started POST "/users" for ::1 at 2022-11-24 19:00:57 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test54@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test54@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test54@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 18:00:58.234629"], ["updated_at", "2022-11-24 18:00:58.234629"]]
+  [1m[36mTRANSACTION (6.4ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 612ms (Views: 0.8ms | ActiveRecord: 7.8ms | Allocations: 3569)
+
+
+Started POST "/users" for ::1 at 2022-11-24 19:01:36 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test55@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test55@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test55@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 18:01:36.797485"], ["updated_at", "2022-11-24 18:01:36.797485"]]
+  [1m[36mTRANSACTION (6.7ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 584ms (Views: 0.7ms | ActiveRecord: 7.9ms | Allocations: 3571)
+
+
+Started POST "/users" for ::1 at 2022-11-24 19:02:15 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test56@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test56@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test56@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 18:02:16.358279"], ["updated_at", "2022-11-24 18:02:16.358279"]]
+  [1m[36mTRANSACTION (5.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 595ms (Views: 0.8ms | ActiveRecord: 7.4ms | Allocations: 3569)
+
+
+Started POST "/users" for ::1 at 2022-11-24 19:02:51 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test57@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test57@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test57@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 18:02:52.312324"], ["updated_at", "2022-11-24 18:02:52.312324"]]
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 591ms (Views: 0.6ms | ActiveRecord: 5.3ms | Allocations: 3567)
+
+
+Started POST "/users" for ::1 at 2022-11-24 19:03:26 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test58@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test58@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (3.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test58@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 18:03:27.580615"], ["updated_at", "2022-11-24 18:03:27.580615"]]
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 606ms (Views: 0.8ms | ActiveRecord: 6.5ms | Allocations: 3568)
+
+
+Started POST "/users" for ::1 at 2022-11-24 19:06:42 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test60@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test60@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test60@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 18:06:42.961433"], ["updated_at", "2022-11-24 18:06:42.961433"]]
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 599ms (Views: 1.0ms | ActiveRecord: 5.1ms | Allocations: 3571)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2022-11-24 19:14:34 +0100
+Processing by Users::SessionsController#destroy as HTML
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 401 Unauthorized in 4ms (Views: 0.5ms | Allocations: 1054)
+
+
+
+JWT::DecodeError - Not enough or too many segments:
+
+Started DELETE "/users/sign_out" for ::1 at 2022-11-24 19:18:44 +0100
+Processing by Users::SessionsController#destroy as HTML
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 401 Unauthorized in 51ms (Views: 0.8ms | Allocations: 936)
+
+
+
+JWT::DecodeError - Not enough or too many segments:
+
+Started DELETE "/users/sign_out" for ::1 at 2022-11-24 19:19:47 +0100
+Processing by Users::SessionsController#destroy as HTML
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 401 Unauthorized in 8ms (Views: 0.6ms | Allocations: 937)
+
+
+
+JWT::DecodeError - Not enough or too many segments:
+
+Started POST "/users" for ::1 at 2022-11-24 19:20:13 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test61@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test61@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (13.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test61@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-24 18:20:14.653996"], ["updated_at", "2022-11-24 18:20:14.653996"]]
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 967ms (Views: 5.3ms | ActiveRecord: 110.2ms | Allocations: 6523)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2022-11-24 19:20:17 +0100
+Processing by Users::SessionsController#destroy as HTML
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 401 Unauthorized in 24ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 939)
+
+
+
+JWT::DecodeError - Not enough or too many segments:
+
+Started POST "/users" for ::1 at 2022-11-25 10:57:46 +0100
+  [1m[36mActiveRecord::SchemaMigration Pluck (3.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test70@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test70@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (14.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test70@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-25 09:57:49.712177"], ["updated_at", "2022-11-25 09:57:49.712177"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 830ms (Views: 3.2ms | ActiveRecord: 35.5ms | Allocations: 40695)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2022-11-25 10:58:06 +0100
+Processing by Users::SessionsController#destroy as HTML
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 401 Unauthorized in 27ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 1940)
+
+
+
+JWT::DecodeError - Invalid segment encoding:
+
+Started POST "/users" for ::1 at 2022-11-25 11:01:09 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test71@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test71@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test71@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-25 10:01:10.520226"], ["updated_at", "2022-11-25 10:01:10.520226"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 619ms (Views: 0.9ms | ActiveRecord: 6.0ms | Allocations: 3819)
+
+
+Started POST "/users" for ::1 at 2022-11-25 11:01:42 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test72@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test72@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test72@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-25 10:01:42.637970"], ["updated_at", "2022-11-25 10:01:42.637970"]]
+  [1m[36mTRANSACTION (5.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 714ms (Views: 0.5ms | ActiveRecord: 6.5ms | Allocations: 3567)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2022-11-25 11:01:59 +0100
+Processing by Users::SessionsController#destroy as HTML
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 76], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:11:in `respond_to_on_destroy'
+  [1m[36mJwtDenylist Exists? (4.0ms)[0m  [1m[34mSELECT 1 AS one FROM "jwt_denylist" WHERE "jwt_denylist"."jti" = $1 LIMIT $2[0m  [["jti", "991468ce-0da0-41f2-800c-a3ecec5fa37f"], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:11:in `respond_to_on_destroy'
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 200 OK in 645ms (Views: 1.9ms | ActiveRecord: 10.0ms | Allocations: 9735)
+
+
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 76], ["LIMIT", 1]]
+  [1m[36mJwtDenylist Load (0.9ms)[0m  [1m[34mSELECT "jwt_denylist".* FROM "jwt_denylist" WHERE "jwt_denylist"."jti" = $1 AND "jwt_denylist"."exp" = $2 LIMIT $3[0m  [["jti", "991468ce-0da0-41f2-800c-a3ecec5fa37f"], ["exp", "2022-11-25 12:01:42"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mJwtDenylist Create (2.6ms)[0m  [1m[32mINSERT INTO "jwt_denylist" ("jti", "exp") VALUES ($1, $2) RETURNING "id"[0m  [["jti", "991468ce-0da0-41f2-800c-a3ecec5fa37f"], ["exp", "2022-11-25 12:01:42"]]
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/users" for ::1 at 2022-11-25 11:06:18 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test73@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test73@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test73@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-25 10:06:18.634757"], ["updated_at", "2022-11-25 10:06:18.634757"]]
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 621ms (Views: 0.7ms | ActiveRecord: 6.0ms | Allocations: 3690)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2022-11-25 11:06:21 +0100
+Processing by Users::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 77], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:11:in `respond_to_on_destroy'
+  [1m[36mJwtDenylist Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jwt_denylist" WHERE "jwt_denylist"."jti" = $1 LIMIT $2[0m  [["jti", "ed9b421b-71d4-429a-abf0-97f6c62181fd"], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:11:in `respond_to_on_destroy'
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 200 OK in 18ms (Views: 0.3ms | ActiveRecord: 1.6ms | Allocations: 1602)
+
+
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 77], ["LIMIT", 1]]
+  [1m[36mJwtDenylist Load (2.8ms)[0m  [1m[34mSELECT "jwt_denylist".* FROM "jwt_denylist" WHERE "jwt_denylist"."jti" = $1 AND "jwt_denylist"."exp" = $2 LIMIT $3[0m  [["jti", "ed9b421b-71d4-429a-abf0-97f6c62181fd"], ["exp", "2022-11-25 12:06:18"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mJwtDenylist Create (7.0ms)[0m  [1m[32mINSERT INTO "jwt_denylist" ("jti", "exp") VALUES ($1, $2) RETURNING "id"[0m  [["jti", "ed9b421b-71d4-429a-abf0-97f6c62181fd"], ["exp", "2022-11-25 12:06:18"]]
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/users" for ::1 at 2022-11-25 11:10:18 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test74@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test74@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test74@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-25 10:10:18.973074"], ["updated_at", "2022-11-25 10:10:18.973074"]]
+  [1m[36mTRANSACTION (5.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 614ms (Views: 0.6ms | ActiveRecord: 6.6ms | Allocations: 3572)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2022-11-25 11:10:22 +0100
+Processing by Users::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 78], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:11:in `respond_to_on_destroy'
+  [1m[36mJwtDenylist Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jwt_denylist" WHERE "jwt_denylist"."jti" = $1 LIMIT $2[0m  [["jti", "9d9c9a50-deac-4f22-a466-7a4e40a5a7e5"], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:11:in `respond_to_on_destroy'
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 200 OK in 14ms (Views: 0.4ms | ActiveRecord: 1.6ms | Allocations: 1590)
+
+
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 78], ["LIMIT", 1]]
+  [1m[36mJwtDenylist Load (0.8ms)[0m  [1m[34mSELECT "jwt_denylist".* FROM "jwt_denylist" WHERE "jwt_denylist"."jti" = $1 AND "jwt_denylist"."exp" = $2 LIMIT $3[0m  [["jti", "9d9c9a50-deac-4f22-a466-7a4e40a5a7e5"], ["exp", "2022-11-25 12:10:18"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mJwtDenylist Create (1.4ms)[0m  [1m[32mINSERT INTO "jwt_denylist" ("jti", "exp") VALUES ($1, $2) RETURNING "id"[0m  [["jti", "9d9c9a50-deac-4f22-a466-7a4e40a5a7e5"], ["exp", "2022-11-25 12:10:18"]]
+  [1m[36mTRANSACTION (4.1ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/users" for ::1 at 2022-11-25 11:10:30 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test75@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test75@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test75@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-25 10:10:31.396007"], ["updated_at", "2022-11-25 10:10:31.396007"]]
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 596ms (Views: 0.6ms | ActiveRecord: 5.1ms | Allocations: 3568)
+
+
+Started POST "/users" for ::1 at 2022-11-25 11:10:48 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test76@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test76@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test76@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-25 10:10:48.845209"], ["updated_at", "2022-11-25 10:10:48.845209"]]
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 551ms (Views: 0.9ms | ActiveRecord: 4.4ms | Allocations: 3570)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2022-11-25 11:10:54 +0100
+Processing by Users::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 80], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:11:in `respond_to_on_destroy'
+  [1m[36mJwtDenylist Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "jwt_denylist" WHERE "jwt_denylist"."jti" = $1 LIMIT $2[0m  [["jti", "84b3cc59-d283-4929-aaca-c205a0625ded"], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:11:in `respond_to_on_destroy'
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 200 OK in 17ms (Views: 1.0ms | ActiveRecord: 1.8ms | Allocations: 1575)
+
+
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 80], ["LIMIT", 1]]
+  [1m[36mJwtDenylist Load (0.9ms)[0m  [1m[34mSELECT "jwt_denylist".* FROM "jwt_denylist" WHERE "jwt_denylist"."jti" = $1 AND "jwt_denylist"."exp" = $2 LIMIT $3[0m  [["jti", "84b3cc59-d283-4929-aaca-c205a0625ded"], ["exp", "2022-11-25 12:10:48"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mJwtDenylist Create (0.9ms)[0m  [1m[32mINSERT INTO "jwt_denylist" ("jti", "exp") VALUES ($1, $2) RETURNING "id"[0m  [["jti", "84b3cc59-d283-4929-aaca-c205a0625ded"], ["exp", "2022-11-25 12:10:48"]]
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/users" for ::1 at 2022-11-25 11:13:17 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test75@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test75@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (6.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test75@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-25 10:13:18.162532"], ["updated_at", "2022-11-25 10:13:18.162532"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 678ms (ActiveRecord: 9.1ms | Allocations: 4839)
+
+
+
+ActiveRecord::RecordNotUnique - PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=(test75@mail.com) already exists.:
+
+Started POST "/users" for ::1 at 2022-11-25 11:13:26 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test76@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test76@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (3.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test76@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-25 10:13:26.667721"], ["updated_at", "2022-11-25 10:13:26.667721"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 589ms (ActiveRecord: 4.3ms | Allocations: 4725)
+
+
+
+ActiveRecord::RecordNotUnique - PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_email"
+DETAIL:  Key (email)=(test76@mail.com) already exists.:
+
+Started POST "/users" for ::1 at 2022-11-25 11:13:32 +0100
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"user"=>{"email"=>"test80@mail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"test80@mail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test80@mail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2022-11-25 10:13:32.800636"], ["updated_at", "2022-11-25 10:13:32.800636"]]
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 607ms (Views: 0.7ms | ActiveRecord: 4.8ms | Allocations: 3567)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2022-11-25 11:13:38 +0100
+Processing by Users::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 83], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:11:in `respond_to_on_destroy'
+  [1m[36mJwtDenylist Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "jwt_denylist" WHERE "jwt_denylist"."jti" = $1 LIMIT $2[0m  [["jti", "97a67e8a-5e75-4602-a1ea-f827d682889a"], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:11:in `respond_to_on_destroy'
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 200 OK in 12ms (Views: 0.3ms | ActiveRecord: 2.0ms | Allocations: 1574)
+
+
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 83], ["LIMIT", 1]]
+  [1m[36mJwtDenylist Load (0.8ms)[0m  [1m[34mSELECT "jwt_denylist".* FROM "jwt_denylist" WHERE "jwt_denylist"."jti" = $1 AND "jwt_denylist"."exp" = $2 LIMIT $3[0m  [["jti", "97a67e8a-5e75-4602-a1ea-f827d682889a"], ["exp", "2022-11-25 12:13:32"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mJwtDenylist Create (1.3ms)[0m  [1m[32mINSERT INTO "jwt_denylist" ("jti", "exp") VALUES ($1, $2) RETURNING "id"[0m  [["jti", "97a67e8a-5e75-4602-a1ea-f827d682889a"], ["exp", "2022-11-25 12:13:32"]]
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
