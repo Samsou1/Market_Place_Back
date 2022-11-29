@@ -31,8 +31,12 @@ class ApartmentsController < ApplicationController
 
   # PATCH/PUT /apartments/1
   def update
-    if @apartment.update(apartment_params)
-      render json: @apartment
+    if @apartment.user_id == current_user.id
+      if @apartment.update(apartment_params)
+        render json: @apartment
+      else
+        render json: @apartment.errors, status: :unprocessable_entity
+      end
     else
       render json: @apartment.errors, status: :unprocessable_entity
     end
