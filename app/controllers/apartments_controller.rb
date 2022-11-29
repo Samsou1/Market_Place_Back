@@ -1,11 +1,14 @@
 class ApartmentsController < ApplicationController
   before_action :set_apartment, only: %i[ show update destroy ]
-  before_action :authenticate_user, only: %i[create update destroy]
+  before_action :authenticate_user!, only: %i[create update destroy]
 
   # GET /apartments
   def index
-    @apartments = Apartment.all
-
+    if params[:search_term]
+      @apartments = Apartment.where(user_id: current_user.id)
+    else
+      @apartments = Apartment.all
+    end
     render json: @apartments
   end
 
@@ -37,7 +40,12 @@ class ApartmentsController < ApplicationController
 
   # DELETE /apartments/1
   def destroy
-    @apartment.destroy
+    if @apartment.user_id == current_user.id
+      @apartment.destroy
+      render json: {message: "The item was successfully deleted"}, status: :ok
+    else
+      render json: {message: "Error, it's not your item, you can't delete it"}, status: :unprocessable_entity
+    end
   end
 
   private
