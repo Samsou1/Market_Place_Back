@@ -7,4 +7,4 @@ test:
 production:
   adapter: redis
   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
-  channel_prefix: rails_7_0_4_api_boiler_plate_production
+  channel_prefix: market_place_back_production
