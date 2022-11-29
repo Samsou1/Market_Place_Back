@@ -10,12 +10,13 @@ class ApartmentsController < ApplicationController
 
   # GET /apartments/1
   def show
-    render json: @apartment
+    render json: @apartment, :include => {:user => {:only => :email}}
   end
 
   # POST /apartments
   def create
     @apartment = Apartment.new(apartment_params)
+    @apartment.user = current_user
 
     if @apartment.save
       render json: @apartment, status: :created, location: @apartment
