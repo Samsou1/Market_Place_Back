@@ -1,5 +1,6 @@
 class ApartmentsController < ApplicationController
   before_action :set_apartment, only: %i[ show update destroy ]
+  before_action :authenticate_user, only: %i[create update destroy]
 
   # GET /apartments
   def index
