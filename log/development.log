@@ -1113,3 +1113,86 @@ Completed 200 OK in 12ms (Views: 0.3ms | ActiveRecord: 2.0ms | Allocations: 1574
   [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
   [1m[36mJwtDenylist Create (1.3ms)[0m  [1m[32mINSERT INTO "jwt_denylist" ("jti", "exp") VALUES ($1, $2) RETURNING "id"[0m  [["jti", "97a67e8a-5e75-4602-a1ea-f827d682889a"], ["exp", "2022-11-25 12:13:32"]]
   [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2022-11-27 21:35:10 +0100
+
+ActiveRecord::ConnectionNotEstablished - connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?:
+
+Started POST "/__better_errors/167def51fda0411d/variables" for ::1 at 2022-11-27 21:35:12 +0100
+Started GET "/favicon.ico" for ::1 at 2022-11-27 21:35:13 +0100
+
+ActiveRecord::ConnectionNotEstablished - connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?:
+
+Started GET "/" for ::1 at 2022-11-27 21:37:23 +0100
+
+ActiveRecord::NoDatabaseError - We could not find your database: rails_7_0_4_api_boiler_plate_development. Which can be found in the database configuration file located at config/database.yml.
+To resolve this issue:
+- Did you create the database for this app, or delete it? You may need to create your database.
+- Has the database name changed? Check your database.yml config has the correct database name.
+To create your database, run:
+        bin/rails db:create:
+
+Started POST "/__better_errors/7078b692e66c551c/variables" for ::1 at 2022-11-27 21:37:24 +0100
+Started GET "/favicon.ico" for ::1 at 2022-11-27 21:37:25 +0100
+
+ActiveRecord::NoDatabaseError - We could not find your database: rails_7_0_4_api_boiler_plate_development. Which can be found in the database configuration file located at config/database.yml.
+To resolve this issue:
+- Did you create the database for this app, or delete it? You may need to create your database.
+- Has the database name changed? Check your database.yml config has the correct database name.
+To create your database, run:
+        bin/rails db:create:
+
+  [1m[35m (843.1ms)[0m  [1m[35mCREATE DATABASE "rails_7_0_4_api_boiler_plate_development" ENCODING = 'unicode'[0m
+  [1m[35m (470.1ms)[0m  [1m[35mCREATE DATABASE "rails_7_0_4_api_boiler_plate_test" ENCODING = 'unicode'[0m
+Started GET "/" for ::1 at 2022-11-27 21:38:36 +0100
+  [1m[35m (46.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (28.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (4.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+
+ActiveRecord::PendingMigrationError - Migrations are pending. To resolve this issue, run:
+        bin/rails db:migrate RAILS_ENV=development
+You have 2 pending migrations:
+20221123135844_devise_create_users.rb
+20221123140015_create_jwt_denylist.rb:
+
+Started POST "/__better_errors/7d6b3eaa47f21998/variables" for ::1 at 2022-11-27 21:38:37 +0100
+Started GET "/favicon.ico" for ::1 at 2022-11-27 21:38:38 +0100
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mCACHE ActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+
+ActiveRecord::PendingMigrationError - Migrations are pending. To resolve this issue, run:
+        bin/rails db:migrate RAILS_ENV=development
+You have 2 pending migrations:
+20221123135844_devise_create_users.rb
+20221123140015_create_jwt_denylist.rb:
+
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5164472170642191015)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20221123135844)
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (36.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp(6), "remember_created_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (8.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (2.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20221123135844"]]
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateJwtDenylist (20221123140015)
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (24.9ms)[0m  [1m[35mCREATE TABLE "jwt_denylist" ("id" bigserial primary key, "jti" character varying NOT NULL, "exp" timestamp NOT NULL)[0m
+  [1m[35m (11.2ms)[0m  [1m[35mCREATE INDEX "index_jwt_denylist_on_jti" ON "jwt_denylist" ("jti")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20221123140015"]]
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (2.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-11-27 20:39:11.638655"], ["updated_at", "2022-11-27 20:39:11.638655"]]
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(5164472170642191015)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2022-11-27 21:39:59 +0100
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/pandaka19/.rvm/gems/ruby-3.0.4/gems/railties-7.0.4/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/pandaka19/.rvm/gems/ruby-3.0.4/gems/railties-7.0.4/lib/rails/templates/rails/welcome/index.html.erb (Duration: 10.4ms | Allocations: 831)
+Completed 200 OK in 88ms (Views: 28.9ms | ActiveRecord: 0.0ms | Allocations: 7669)
+
+
