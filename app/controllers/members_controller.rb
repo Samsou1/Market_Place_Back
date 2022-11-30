@@ -4,9 +4,25 @@ class MembersController < ApplicationController
     def show
       user = get_user_from_token
       render json: {
-        message: "If you see this, you're in!",
+        message: "User data",
         user: user
       }
+    end
+
+    def update
+      params.permit!
+      user = get_user_from_token
+      if user
+        user.update(params[:user])
+        render json: {
+          message: "User successfully updated",
+          user: user
+        }
+      else
+        render json: {
+              message: "Something went wrong"
+            }
+      end
     end
   
     private
