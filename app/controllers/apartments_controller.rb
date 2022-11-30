@@ -5,7 +5,11 @@ class ApartmentsController < ApplicationController
   # GET /apartments
   def index
     if params[:search_term]
-      @apartments = Apartment.where(user_id: current_user.id)
+      if params[:search_term] == 'user'
+        @apartments = Apartment.where(user_id: current_user.id)
+      else
+        @apartments = Apartment.where('lower(city) LIKE :prefix', prefix: "#{params[:search_term].downcase}%")
+      end
     else
       @apartments = Apartment.all
     end
