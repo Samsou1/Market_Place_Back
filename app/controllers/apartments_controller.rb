@@ -1,11 +1,18 @@
 class ApartmentsController < ApplicationController
   before_action :set_apartment, only: %i[ show update destroy ]
-  before_action :authenticate_user, only: %i[create update destroy]
+  before_action :authenticate_user!, only: %i[create update destroy]
 
   # GET /apartments
   def index
-    @apartments = Apartment.all
-
+    if params[:search_term]
+      if params[:search_term] == 'user'
+        @apartments = Apartment.where(user_id: current_user.id)
+      else
+        @apartments = Apartment.where('lower(city) LIKE :prefix', prefix: "#{params[:search_term].downcase}%")
+      end
+    else
+      @apartments = Apartment.all
+    end
     render json: @apartments
   end
 
@@ -28,8 +35,12 @@ class ApartmentsController < ApplicationController
 
   # PATCH/PUT /apartments/1
   def update
-    if @apartment.update(apartment_params)
-      render json: @apartment
+    if @apartment.user_id == current_user.id
+      if @apartment.update(apartment_params)
+        render json: @apartment
+      else
+        render json: @apartment.errors, status: :unprocessable_entity
+      end
     else
       render json: @apartment.errors, status: :unprocessable_entity
     end
@@ -37,7 +48,12 @@ class ApartmentsController < ApplicationController
 
   # DELETE /apartments/1
   def destroy
-    @apartment.destroy
+    if @apartment.user_id == current_user.id
+      @apartment.destroy
+      render json: {message: "The item was successfully deleted"}, status: :ok
+    else
+      render json: {message: "Error, it's not your item, you can't delete it"}, status: :unprocessable_entity
+    end
   end
 
   private
