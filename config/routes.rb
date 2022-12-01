@@ -4,6 +4,7 @@ Rails.application.routes.draw do
              controllers: {
                  sessions: 'users/sessions',
                  registrations: 'users/registrations'
-             }
+             }, defaults: { format: :json }
   get '/member-data', to: 'members#show'
+  patch '/member-update', to: 'members#update'
 end
