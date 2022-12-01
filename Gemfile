@@ -43,6 +43,7 @@ gem 'faker'
 gem 'devise'
 gem 'devise-jwt'
 gem 'rack-cors'
+gem 'activestorage'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

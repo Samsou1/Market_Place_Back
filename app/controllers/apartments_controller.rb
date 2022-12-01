@@ -18,15 +18,15 @@ class ApartmentsController < ApplicationController
 
   # GET /apartments/1
   def show
-    render json: @apartment, :include => {:user => {:only => :email}}
+    render json: @apartment, :include => {:user => {:only => :email}, :picture => url_for(:picture)}
   end
 
   # POST /apartments
   def create
     @apartment = Apartment.new(apartment_params)
     @apartment.user = current_user
-
     if @apartment.save
+      @apartment.picture.attach(params[:picture])
       render json: @apartment, status: :created, location: @apartment
     else
       render json: @apartment.errors, status: :unprocessable_entity
@@ -64,6 +64,10 @@ class ApartmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def apartment_params
-      params.require(:apartment).permit(:title, :description, :price, :address, :city, :postal_code, :surface, :furnished, :garden, :basement, :custodian)
+      params.require(:apartment).except(:picture).permit(:title, :description, :price, :address, :city, :postal_code, :surface, :furnished, :garden, :basement, :custodian)
+    end
+    
+    def picture_param
+      params.require(:apartment).slice(:picture).permit(:picture)
     end
 end
